@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>DMVPOUCHES — Homecoming Week</title>
+<style>
+  :root { --bg:#0b0b0f; --card:#121218; --accent:#ff2fb0; --text:#e9e9ef; }
+  *{box-sizing:border-box} body{margin:0;background:linear-gradient(180deg,#0b0b0f, #121218);color:var(--text);font-family:system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif}
+  header{position:sticky;top:0;background:rgba(11,11,15,.7);backdrop-filter:blur(10px);border-bottom:1px solid rgba(255,255,255,.08);z-index:10}
+  .wrap{max-width:1100px;margin:0 auto;padding:16px}
+  h1{margin:6px 0 2px 0;font-size:28px}
+  .tagline{opacity:.8;font-size:14px}
+  .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px;margin-top:18px}
+  .card{background:linear-gradient(180deg,#151521,#10101a);border:1px solid rgba(255,255,255,.08);border-radius:16px;overflow:hidden;box-shadow:0 10px 30px rgba(0,0,0,.35)}
+  .card img{display:block;width:100%;height:180px;object-fit:cover}
+  .card .body{padding:12px 12px 14px 12px}
+  .meta{font-size:12px;opacity:.9;margin-top:4px;display:flex;gap:8px;flex-wrap:wrap}
+  .title{font-weight:800;font-size:16px;line-height:1.25}
+  .btn{display:inline-block;margin-top:10px;background:var(--accent);color:white;text-decoration:none;padding:10px 14px;border-radius:12px;font-weight:800}
+  footer{opacity:.6;text-align:center;padding:26px 12px;font-size:12px}
+  .hero{padding:26px 0 10px 0}
+  .hero .actions{margin-top:10px;display:flex;gap:10px;flex-wrap:wrap}
+  .share{border:1px solid rgba(255,255,255,.15);padding:8px 12px;border-radius:10px;text-decoration:none;color:var(--text)}
+</style>
+</head>
+<body>
+  <header>
+    <div class="wrap">
+      <div style="display:flex;align-items:center;justify-content:space-between;gap:10px">
+        <div>
+          <h1>DMVPOUCHES</h1>
+          <div class="tagline">All Your Parties. One Epic Link.</div>
+        </div>
+        <a class="share" href="https://instagram.com/dmvpouches" target="_blank">IG</a>
+      </div>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <section class="hero">
+      <div class="actions">
+        <a class="btn" href="https://posh.vip/e/uncaged-all-black" target="_blank">Next Up: Buy Tickets</a>
+        <a class="share" href="#" onclick="navigator.clipboard.writeText(window.location.href);alert('Link copied');return false;">Share</a>
+      </div>
+    </section>
+
+    <section>
+      <h2>Oct 12–19 — Upcoming Events</h2>
+      <div class="grid">
+        <article class="card">
+          <img src="parking_lot_pimping.jpg" alt="Parking Lot Pimping">
+          <div class="body">
+            <div class="title">Parking Lot Pimping</div>
+            <div class="meta">Oct 12 · 12AM–2AM · Secret Location · Richmond, VA</div>
+            <a class="btn" href="https://posh.vip/e/parking-lot-pimping-1" target="_blank">Buy Tickets</a>
+          </div>
+        </article>
+
+        <article class="card">
+          <img src="panthers_vs_everybody.jpg" alt="Panthers vs Everybody">
+          <div class="body">
+            <div class="title">Panthers vs Everybody</div>
+            <div class="meta">Oct 14 · 10PM–2AM · Secret Location · Richmond, VA</div>
+            <a class="btn" href="https://posh.vip/e/panthers-vs-everybody" target="_blank">Buy Tickets</a>
+          </div>
+        </article>
+
+        <article class="card">
+          <img src="panther_chaos.jpg" alt="Panther Chaos">
+          <div class="body">
+            <div class="title">Panther Chaos</div>
+            <div class="meta">Oct 16 · Starts 9PM · TBA · Richmond, VA</div>
+            <a class="btn" href="https://posh.vip/e/panthers-chaos" target="_blank">Buy Tickets</a>
+          </div>
+        </article>
+
+        <article class="card">
+          <img src="burgundy_black.jpg" alt="Burgundy & Black Night">
+          <div class="body">
+            <div class="title">Burgundy & Black Night</div>
+            <div class="meta">Oct 17 · 10PM–2AM · TBA · Richmond, VA</div>
+            <a class="btn" href="https://posh.vip/e/burgundy-and-black" target="_blank">Buy Tickets</a>
+          </div>
+        </article>
+
+        <article class="card">
+          <img src="uncaged.jpg" alt="UNCAGED All Black">
+          <div class="body">
+            <div class="title">UNCAGED: All Black — Homecoming Finale</div>
+            <div class="meta">Oct 18 · 10PM–2AM · 1419 E Cary St · Richmond, VA</div>
+            <a class="btn" href="https://posh.vip/e/uncaged-all-black" target="_blank">Buy Tickets</a>
+          </div>
+        </article>
+
+        <article class="card">
+          <img src="aftermath_brunch.jpg" alt="Aftermath Brunch">
+          <div class="body">
+            <div class="title">Aftermath Brunch</div>
+            <div class="meta">Oct 19 · 12PM–4PM · TBA · Richmond, VA</div>
+            <a class="btn" href="https://posh.vip/e/aftermath-brunch" target="_blank">Buy Tickets</a>
+          </div>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <footer>© <span id="y"></span> DMVPOUCHES. All vibes reserved.</footer>
+<script>document.getElementById('y').textContent=new Date().getFullYear()</script>
+</body>
+</html>
