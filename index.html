@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>DMVPOUCHES — All Your Parties. One Epic Link.</title>
+<style>
+  :root{
+    --bg:#07070b;
+    --text:#e9eaf3;
+    --muted:#9aa0b4;
+    --accent:#00e5ff;
+    --accent-2:#8a5cff;
+    --accent-3:#35ff9b;
+    --danger:#ff3b6a;
+    --panel:#10111a;
+    --panel2:#141527;
+  }
+  *{box-sizing:border-box}
+  body{
+    margin:0; font-family:system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif; color:var(--text);
+    background:var(--bg);
+  }
+  /* PARTY BACKDROP */
+  body::before{
+    content:""; position:fixed; inset:0; z-index:-2;
+    background:url("panthers_vs_everybody.jpg") center/cover no-repeat;
+    filter:blur(14px) brightness(.35) saturate(1.2);
+    transform:scale(1.04);
+  }
+  body::after{
+    content:""; position:fixed; inset:-20%;
+    background:
+      radial-gradient(60% 60% at 20% 20%, rgba(0,229,255,.22), transparent 55%),
+      radial-gradient(55% 55% at 80% 80%, rgba(138,92,255,.22), transparent 60%);
+    z-index:-1; opacity:.75; animation:float 12s ease-in-out infinite alternate;
+  }
+  @keyframes float{to{transform:translateY(-10px)}}
+
+  /* Header (NOT sticky) */
+  header{
+    background:rgba(7,7,11,.42); backdrop-filter:blur(10px);
+    border-bottom:1px solid rgba(255,255,255,.08);
+  }
+  .wrap{max-width:1100px; margin:0 auto; padding:16px}
+  .headline{
+    margin:6px 0 0; font-weight:900; font-size:26px; line-height:1.2;
+    background:linear-gradient(90deg,var(--accent),var(--accent-2));
+    -webkit-background-clip:text; background-clip:text; color:transparent;
+    filter:drop-shadow(0 0 10px rgba(0,229,255,.25));
+  }
+  h1{margin:4px 0 0; font-size:20px; opacity:.9; letter-spacing:.4px}
+
+  /* Nav */
+  nav{margin-top:10px; display:flex; gap:10px; flex-wrap:wrap}
+  .nav-link{
+    border:1px solid rgba(255,255,255,.16);
+    padding:8px 12px; border-radius:12px; text-decoration:none; color:var(--text); font-weight:800
+  }
+
+  /* Event cards */
+  main .section-title{font-size:30px; margin:18px 0 12px}
+  .grid{display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:16px}
+  .card{
+    background:linear-gradient(180deg,var(--panel2),#0e1018);
+    border:1px solid rgba(255,255,255,.08);
+    border-radius:16px; overflow:hidden;
+    box-shadow:0 15px 35px rgba(0,0,0,.45);
+    transition:transform .15s ease, box-shadow .2s ease, border-color .2s ease;
+  }
+  .card:hover{transform:translateY(-2px); border-color:rgba(0,229,255,.35); box-shadow:0 20px 45px rgba(0,229,255,.1)}
+  .card img{display:block; width:100%; height:190px; object-fit:cover}
+  .body{padding:12px 12px 16px}
+  .title{font-weight:900; font-size:18px}
+  .meta{font-size:12px; color:var(--muted); margin-top:4px}
+  .btn{
+    display:inline-block; margin-top:10px; padding:10px 14px; border-radius:12px; text-decoration:none;
+    font-weight:900; color:#00131a; background:var(--accent);
+    box-shadow:0 0 20px rgba(0,229,255,.35);
+  }
+
+  /* UNCAGED — stronger featured look */
+  .highlight{
+    position:relative; border-color:rgba(138,92,255,.65);
+    box-shadow:0 0 28px rgba(138,92,255,.36), 0 0 48px rgba(0,229,255,.18);
+    animation:pulse 2.2s ease-in-out infinite;
+  }
+  .highlight::before{
+    content:"FEATURED";
+    position:absolute; top:10px; left:-10px;
+    background:linear-gradient(90deg,var(--danger),#ffb3c7);
+    color:#180010; font-weight:900; font-size:11px;
+    padding:6px 10px; border-radius:0 10px 10px 0; letter-spacing:.6px;
+    box-shadow:0 0 12px rgba(255,59,106,.45);
+  }
+  .highlight::after{
+    content:""; position:absolute; inset:-6px; border-radius:20px;
+    border:2px solid rgba(0,229,255,.35); filter:blur(2px); pointer-events:none;
+    animation:ring 3.2s ease-in-out infinite;
+  }
+  @keyframes pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.025)}}
+  @keyframes ring{0%,100%{opacity:.35}50%{opacity:.85}}
+  @media (prefers-reduced-motion: reduce){.highlight,.highlight::after{animation:none}}
+
+  /* Calendar */
+  .cal-wrap{margin-top:30px}
+  .cal-header{display:flex; align-items:center; justify-content:space-between; gap:12px; margin:6px 0 12px}
+  .cal-title{font-weight:900; font-size:24px}
+  .cal-nav button{
+    background:linear-gradient(90deg,var(--accent),var(--accent-2));
+    border:none; color:#00131a; font-weight:900; padding:8px 12px; border-radius:10px; cursor:pointer;
+    box-shadow:0 0 16px rgba(0,229,255,.25)
+  }
+  .cal-grid{
+    display:grid; gap:8px; grid-template-columns:repeat(7,1fr);
+    background:rgba(255,255,255,.05); padding:12px; border-radius:16px; border:1px solid rgba(255,255,255,.08)
+  }
+  .dow{opacity:.85; text-align:center; font-size:12px; padding:8px 0; font-weight:800}
+  .cell{
+    background:linear-gradient(180deg,var(--panel2),#0f1120);
+    border:1px solid rgba(255,255,255,.06);
+    border-radius:12px;
+    display:flex; flex-direction:column; gap:6px;
+    padding:8px;
+    /* uniform size for ALL cells */
+    min-height:120px;
+  }
+  .date{font-size:13px; opacity:.9; font-weight:800}
+  .event{
+    font-size:12px; font-weight:900; line-height:1.2;
+    background:linear-gradient(90deg,var(--accent-2),var(--accent-3));
+    -webkit-background-clip:text; color:transparent;
+  }
+
+  /* Bottom contact buttons with icons + labels */
+  .bottom-actions{
+    margin:28px 0 8px; display:flex; gap:16px; justify-content:center; align-items:center; flex-wrap:wrap
+  }
+  .icon-btn{
+    width:60px; height:60px; border-radius:14px; display:flex; align-items:center; justify-content:center;
+    text-decoration:none; background:linear-gradient(180deg,#151627,#0e0f1a);
+    border:1px solid rgba(255,255,255,.14); box-shadow:0 10px 22px rgba(0,0,0,.35)
+  }
+  .icon-col{display:flex; flex-direction:column; align-items:center; gap:6px}
+  .icon-label{font-size:11px; color:var(--muted); font-weight:800; letter-spacing:.4px}
+  .icon-btn svg{width:26px; height:26px}
+
+  footer{opacity:.7; text-align:center; padding:18px; font-size:12px}
+</style>
+</head>
+<body>
+  <header>
+    <div class="wrap">
+      <div class="headline">We Bring The Vibes So Come Get Lit</div>
+      <h1>DMVPOUCHES • All Your Parties. One Epic Link.</h1>
+      <nav>
+        <a class="nav-link" href="#events">Events</a>
+        <a class="nav-link" href="#calendar">Calendar</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <h2 id="events" class="section-title">Upcoming Events</h2>
+
+    <div class="grid">
+      <article class="card">
+        <img src="parking_lot_pimping.jpg" alt="Parking Lot Pimping flyer">
+        <div class="body">
+          <div class="title">Parking Lot Pimping</div>
+          <div class="meta">Oct 12 · Richmond, VA</div>
+          <a class="btn" href="https://posh.vip/e/parking-lot-pimping-1" target="_blank" rel="noopener">Buy Tickets</a>
+        </div>
+      </article>
+
+      <article class="card">
+        <img src="panthers_vs_everybody.jpg" alt="Panthers vs Everybody flyer">
+        <div class="body">
+          <div class="title">Panthers vs Everybody</div>
+          <div class="meta">Oct 14 · Richmond, VA</div>
+          <a class="btn" href="https://posh.vip/e/panthers-vs-everybody" target="_blank" rel="noopener">Buy Tickets</a>
+        </div>
+      </article>
+
+      <article class="card">
+        <img src="panther_chaos.jpg" alt="Panther Chaos flyer">
+        <div class="body">
+          <div class="title">Panther Chaos</div>
+          <div class="meta">Oct 16 · Richmond, VA</div>
+          <a class="btn" href="https://posh.vip/e/panthers-chaos" target="_blank" rel="noopener">Buy Tickets</a>
+        </div>
+      </article>
+
+      <article class="card">
+        <img src="burgundy_black.jpg" alt="Burgundy & Black flyer">
+        <div class="body">
+          <div class="title">Burgundy & Black Night</div>
+          <div class="meta">Oct 17 · Richmond, VA</div>
+          <a class="btn" href="https://posh.vip/e/burgundy-and-black" target="_blank" rel="noopener">Buy Tickets</a>
+        </div>
+      </article>
+
+      <!-- UNCAGED — featured -->
+      <article class="card highlight">
+        <img src="uncaged.jpg" alt="UNCAGED: All Black flyer">
+        <div class="body">
+          <div class="title">UNCAGED: All Black — Homecoming Finale</div>
+          <div class="meta">Oct 18 · 1419 E Cary St · Richmond, VA</div>
+          <a class="btn" href="https://posh.vip/e/uncaged-all-black" target="_blank" rel="noopener">Buy Tickets</a>
+        </div>
+      </article>
+
+      <article class="card">
+        <img src="aftermath_brunch.jpg" alt="Aftermath Brunch flyer">
+        <div class="body">
+          <div class="title">Aftermath Brunch</div>
+          <div class="meta">Oct 19 · Richmond, VA</div>
+          <a class="btn" href="https://posh.vip/e/aftermath-brunch" target="_blank" rel="noopener">Buy Tickets</a>
+        </div>
+      </article>
+    </div>
+
+    <!-- CALENDAR -->
+    <section id="calendar" class="cal-wrap">
+      <div class="cal-header">
+        <div class="cal-title" id="calTitle">Calendar</div>
+        <div class="cal-nav">
+          <button id="prevBtn" aria-label="Previous Month">◄ Prev</button>
+          <button id="nextBtn" aria-label="Next Month">Next ►</button>
+        </div>
+      </div>
+      <div class="cal-grid" id="calendarGrid"></div>
+    </section>
+
+    <!-- Bottom contact buttons with clear icons + labels -->
+    <div class="bottom-actions">
+      <div class="icon-col">
+        <a class="icon-btn" href="https://instagram.com/dmvpouches" target="_blank" rel="noopener" aria-label="Instagram">
+          <!-- Instagram SVG -->
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <defs>
+              <linearGradient id="igGradient" x1="0" y1="0" x2="1" y2="1">
+                <stop offset="0%" stop-color="#f58529"/>
+                <stop offset="50%" stop-color="#dd2a7b"/>
+                <stop offset="100%" stop-color="#8134af"/>
+              </linearGradient>
+            </defs>
+            <path fill="url(#igGradient)" d="M7 2h10a5 5 0 0 1 5 5v10a5 5 0 0 1-5 5H7a5 5 0 0 1-5-5V7a5 5 0 0 1 5-5zm5 4a6 6 0 1 0 0 12 6 6 0 0 0 0-12zm0 2.2a3.8 3.8 0 1 1 0 7.6 3.8 3.8 0 0 1 0-7.6zM18.5 6.2a1.3 1.3 0 1 0 0 2.6 1.3 1.3 0 0 0 0-2.6z"/>
+          </svg>
+        </a>
+        <div class="icon-label">IG</div>
+      </div>
+
+      <div class="icon-col">
+        <a class="icon-btn" href="mailto:dmvpouches@gmail.com" aria-label="Email">
+          <!-- Email SVG -->
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path fill="#00e5ff" d="M3 5h18a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2zm9 6L3.8 7.6A1 1 0 0 0 3 8.5V17h18V8.5a1 1 0 0 0-.8-.9L12 11zM4.2 7h15.6L12 11.7 4.2 7z"/>
+          </svg>
+        </a>
+        <div class="icon-label">Email</div>
+      </div>
+
+      <div class="icon-col">
+        <a class="icon-btn" href="tel:+18047591332" aria-label="Call">
+          <!-- Phone SVG -->
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path fill="#35ff9b" d="M6.6 10.8a15.3 15.3 0 0 0 6.6 6.6l2.2-2.2c.3-.3.7-.4 1.1-.3 1.3.4 2.7.6 4.1.6.6 0 1 .4 1 1V21c0 .6-.4 1-1 1C11.4 22 2 12.6 2 2.5 2 1.9 2.4 1.5 3 1.5H7c.6 0 1 .4 1 1 0 1.4.2 2.8.6 4.1.1.4 0 .8-.3 1.1L6.6 10.8z"/>
+          </svg>
+        </a>
+        <div class="icon-label">Call</div>
+      </div>
+    </div>
+  </main>
+
+  <footer>© <span id="y"></span> DMVPOUCHES — All vibes reserved.</footer>
+
+<script>
+  // Footer year
+  document.getElementById('y').textContent = new Date().getFullYear();
+
+  // Events (dates are 2025 to match earlier setup)
+  const EVENTS = [
+    { title:"White Lit T-Shirt", start:"2025-09-26" },
+    { title:"Girls Night Out", start:"2025-10-04" },
+
+    { title:"Parking Lot Pimping", start:"2025-10-12" },
+    { title:"Panthers vs Everybody", start:"2025-10-14" },
+    { title:"Panther Chaos", start:"2025-10-16" },
+    { title:"Burgundy & Black Night", start:"2025-10-17" },
+    { title:"UNCAGED: All Black — Homecoming Finale", start:"2025-10-18" },
+    { title:"Aftermath Brunch", start:"2025-10-19" },
+
+    { title:"Homecoming Horrors", start:"2025-10-23" },
+    { title:"Twerk or Treat (RSVP)", start:"2025-10-24" },
+    { title:"VSU All Black", start:"2025-10-25" },
+    { title:"Fright Night Freaknik", start:"2025-10-30" },
+    { title:"Nightmare in the 804", start:"2025-10-31" },
+    { title:"Spooky Cheeks", start:"2025-11-01" }
+  ];
+
+  const calEl = document.getElementById('calendarGrid');
+  const titleEl = document.getElementById('calTitle');
+  const prevBtn = document.getElementById('prevBtn');
+  const nextBtn = document.getElementById('nextBtn');
+
+  const DOW = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
+
+  // current view: first of month
+  let view = new Date();
+  view.setDate(1);
+
+  function pad2(n){ return n.toString().padStart(2,'0'); }
+  function ymd(y,m,d){ return `${y}-${pad2(m)}-${pad2(d)}`; }
+
+  function renderCalendar(){
+    calEl.innerHTML = '';
+
+    const y = view.getFullYear();
+    const m = view.getMonth(); // 0-based
+    titleEl.textContent = view.toLocaleString(undefined, { month:'long', year:'numeric' });
+
+    // Header row
+    DOW.forEach(d => {
+      const h = document.createElement('div');
+      h.className = 'dow';
+      h.textContent = d;
+      calEl.appendChild(h);
+    });
+
+    const firstDay = new Date(y, m, 1).getDay();
+    const daysInMonth = new Date(y, m + 1, 0).getDate();
+
+    // Map events by date string
+    const map = {};
+    EVENTS.forEach(ev => { (map[ev.start] ||= []).push(ev); });
+
+    // Total cells to complete rows (7 columns)
+    const leading = firstDay;
+    const totalCells = Math.ceil((leading + daysInMonth) / 7) * 7;
+
+    for (let cellIndex = 0; cellIndex < totalCells; cellIndex++) {
+      const cell = document.createElement('div');
+      cell.className = 'cell';
+
+      const dayNum = cellIndex - leading + 1;
+      const inMonth = dayNum >= 1 && dayNum <= daysInMonth;
+
+      const dateEl = document.createElement('div');
+      dateEl.className = 'date';
+      dateEl.textContent = inMonth ? dayNum : '';
+      cell.appendChild(dateEl);
+
+      if (inMonth) {
+        const dateStr = ymd(y, m+1, dayNum);
+        if (map[dateStr]) {
+          map[dateStr].forEach(ev => {
+            const e = document.createElement('div');
+            e.className = 'event';
+            e.textContent = ev.title;
+            cell.appendChild(e);
+          });
+        }
+      }
+
+      calEl.appendChild(cell);
+    }
+  }
+
+  prevBtn.addEventListener('click', () => { view.setMonth(view.getMonth() - 1); renderCalendar(); });
+  nextBtn.addEventListener('click', () => { view.setMonth(view.getMonth() + 1); renderCalendar(); });
+
+  renderCalendar();
+</script>
+</body>
+</html>
