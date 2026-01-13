@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>DMVPOUCHES — All Your Parties. One Epic Link.</title>
+<meta name="description" content="DMVPOUCHES • We Bring The Vibes So Come Get Lit."/>
+
+<style>
+:root{
+ --bg:#07070b;--text:#e9eaf3;--muted:#9aa0b4;
+ --accent:#00e5ff;--accent-2:#8a5cff;--accent-3:#35ff9b;
+ --danger:#ff3b6a;--card:#0f1120;--card2:#141527;
+ --border:rgba(255,255,255,.10);
+}
+*{box-sizing:border-box}
+html,body{margin:0;background:var(--bg);color:var(--text);
+font-family:system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif}
+a{text-decoration:none;color:inherit}
+
+/* BACKDROP */
+body::before{
+ content:"";position:fixed;inset:0;z-index:-2;
+ background:url("ram_jam.jpg") center/cover no-repeat;
+ filter:blur(14px) brightness(.35);transform:scale(1.05);
+}
+body::after{
+ content:"";position:fixed;inset:-18%;z-index:-1;opacity:.6;
+ background:
+   radial-gradient(60% 60% at 20% 20%, rgba(0,229,255,.25),transparent 55%),
+   radial-gradient(55% 55% at 80% 80%, rgba(138,92,255,.25),transparent 60%);
+}
+
+/* HEADER */
+header{background:rgba(7,7,11,.5);backdrop-filter:blur(10px);
+border-bottom:1px solid rgba(255,255,255,.08)}
+.wrap{max-width:1100px;margin:0 auto;padding:16px}
+.headline{
+ font-weight:900;font-size:26px;
+ background:linear-gradient(90deg,var(--accent),var(--accent-2));
+ -webkit-background-clip:text;color:transparent;
+}
+h1{font-size:16px;opacity:.9}
+
+/* COUNTDOWN */
+.countdown{
+ margin:18px 0 26px;
+ padding:20px;
+ border-radius:18px;
+ text-align:center;
+ background:linear-gradient(180deg,#141527,#0f1120);
+ border:1px solid rgba(255,255,255,.14);
+ box-shadow:0 0 35px rgba(138,92,255,.35),
+            0 0 60px rgba(0,229,255,.25);
+ animation:countPulse 2.5s ease-in-out infinite;
+}
+.cd-title{
+ font-size:13px;
+ font-weight:900;
+ letter-spacing:.14em;
+ opacity:.85;
+}
+.cd-time{
+ font-size:30px;
+ font-weight:900;
+ margin:10px 0;
+ background:linear-gradient(90deg,var(--accent),var(--accent-2));
+ -webkit-background-clip:text;
+ color:transparent;
+}
+.cd-sub{
+ font-size:12px;
+ color:var(--muted);
+ font-weight:800;
+}
+@keyframes countPulse{
+ 0%,100%{transform:scale(1)}
+ 50%{transform:scale(1.03)}
+}
+
+/* EVENTS */
+.section-title{font-size:28px;margin:22px 0 10px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px}
+.card{
+ background:linear-gradient(180deg,var(--card2),var(--card));
+ border:1px solid var(--border);
+ border-radius:16px;
+ overflow:hidden;
+ position:relative;
+ box-shadow:0 15px 35px rgba(0,0,0,.45);
+}
+.card img{width:100%;height:190px;object-fit:cover}
+.body{padding:14px}
+.title{font-weight:900;font-size:18px}
+.meta{font-size:12px;color:var(--muted);margin-top:4px}
+.btn{
+ display:inline-block;margin-top:10px;padding:10px 14px;
+ border-radius:12px;font-weight:900;
+ background:var(--accent);color:#00131a;
+}
+
+/* FEATURED — RAM JAM */
+.highlight{
+ border-color:rgba(138,92,255,.7);
+ box-shadow:0 0 30px rgba(138,92,255,.4),
+            0 0 55px rgba(0,229,255,.25);
+ animation:pulse 2s ease-in-out infinite;
+}
+.highlight::before{
+ content:"FEATURED";
+ position:absolute;top:10px;left:-8px;
+ background:linear-gradient(90deg,var(--danger),#ff9ab7);
+ color:#160007;font-size:11px;font-weight:900;
+ padding:6px 10px;border-radius:0 10px 10px 0;
+}
+@keyframes pulse{
+ 0%,100%{transform:scale(1)}
+ 50%{transform:scale(1.025)}
+}
+
+/* CALENDAR */
+.cal-wrap{margin-top:40px}
+.cal-title{font-size:24px;font-weight:900;margin-bottom:10px}
+.cal-grid{
+ display:grid;grid-template-columns:repeat(7,1fr);
+ gap:8px;padding:12px;border-radius:16px;
+ background:rgba(255,255,255,.05)
+}
+.dow{text-align:center;font-size:12px;font-weight:800;opacity:.8}
+.cell{
+ background:linear-gradient(180deg,var(--card2),var(--card));
+ border-radius:12px;padding:8px;min-height:110px
+}
+.date{font-size:13px;font-weight:800}
+.event{
+ font-size:12px;font-weight:900;
+ background:linear-gradient(90deg,var(--accent-2),var(--accent-3));
+ -webkit-background-clip:text;color:transparent
+}
+
+footer{text-align:center;opacity:.6;padding:20px;font-size:12px}
+</style>
+</head>
+
+<body>
+
+<header>
+ <div class="wrap">
+   <div class="headline">We Bring The Vibes So Come Get Lit</div>
+   <h1>DMVPOUCHES • All Your Parties. One Epic Link.</h1>
+ </div>
+</header>
+
+<main class="wrap">
+
+<h2 class="section-title">Upcoming Events — February 2026</h2>
+
+<!-- COUNTDOWN -->
+<div class="countdown">
+ <div class="cd-title">RAMILY WEEK COUNTDOWN</div>
+ <div class="cd-time" id="cdTime">Loading…</div>
+ <div class="cd-sub">Feb 22 – Feb 28, 2026</div>
+</div>
+
+<div class="grid">
+
+<article class="card">
+ <img src="ramho_kickoff.jpg">
+ <div class="body">
+   <div class="title">RamHO Kickoff | Ramily vs Everybody</div>
+   <div class="meta">Feb 22, 2026 · Doors 10PM</div>
+   <a class="btn" href="https://posh.vip/e/ramilyvseverybody" target="_blank">Buy Tickets</a>
+ </div>
+</article>
+
+<article class="card">
+ <img src="ramily_2000s_pj.jpg">
+ <div class="body">
+   <div class="title">Ramily 2000s PJ Party</div>
+   <div class="meta">Feb 25, 2026 · Doors 10PM</div>
+   <a class="btn" href="https://posh.vip/e/ramily-2000-pj-party" target="_blank">Buy Tickets</a>
+ </div>
+</article>
+
+<article class="card">
+ <img src="anything_glows.jpg">
+ <div class="body">
+   <div class="title">Anything Glows</div>
+   <div class="meta">Feb 26, 2026 · Doors 10PM</div>
+   <a class="btn" href="https://posh.vip/e/anything-glows-glowstick-party" target="_blank">Buy Tickets</a>
+ </div>
+</article>
+
+<article class="card highlight">
+ <img src="ram_jam.jpg">
+ <div class="body">
+   <div class="title">10th Annual RAM JAM</div>
+   <div class="meta">Feb 27, 2026 · Doors 10PM</div>
+   <a class="btn" href="https://posh.vip/e/ram-jam-1" target="_blank">Buy Tickets</a>
+ </div>
+</article>
+
+<article class="card">
+ <img src="vanity_all_black.jpg">
+ <div class="body">
+   <div class="title">Vanity | All Black Attire</div>
+   <div class="meta">Feb 28, 2026 · Doors 10PM</div>
+   <a class="btn" href="https://posh.vip/e/vanity-all-black-attire" target="_blank">Buy Tickets</a>
+ </div>
+</article>
+
+</div>
+
+<section class="cal-wrap">
+ <div class="cal-title">February 2026</div>
+ <div class="cal-grid" id="calendarGrid"></div>
+</section>
+
+</main>
+
+<footer>© <span id="y"></span> DMVPOUCHES</footer>
+
+<script>
+document.getElementById("y").textContent=new Date().getFullYear();
+
+/* WEEK COUNTDOWN */
+const startTime=new Date("2026-02-22T22:00:00");
+const endTime=new Date("2026-02-28T23:59:59");
+const cd=document.getElementById("cdTime");
+
+function tick(){
+ const now=new Date();
+ if(now<startTime){
+   const diff=startTime-now;
+   const d=Math.floor(diff/86400000);
+   const h=Math.floor(diff/3600000)%24;
+   const m=Math.floor(diff/60000)%60;
+   const s=Math.floor(diff/1000)%60;
+   cd.textContent=`${d}d ${h}h ${m}m ${s}s`;
+ }else if(now<=endTime){
+   cd.textContent="RAMILY WEEK IS LIVE 🔥";
+ }else{
+   cd.textContent="EVENT WEEK HAS ENDED";
+ }
+}
+tick();setInterval(tick,1000);
+
+/* CALENDAR */
+const YEAR=2026,MONTH=1;
+const EVENTS={22:"RAMHO Kickoff",25:"Ramily 2000s PJ Party",26:"Anything Glows",27:"RAM JAM",28:"Vanity"};
+const grid=document.getElementById("calendarGrid");
+["Sun","Mon","Tue","Wed","Thu","Fri","Sat"].forEach(d=>{
+ const e=document.createElement("div");e.className="dow";e.textContent=d;grid.appendChild(e);
+});
+const first=new Date(YEAR,MONTH,1).getDay();
+const days=new Date(YEAR,MONTH+1,0).getDate();
+for(let i=0;i<first;i++)grid.appendChild(document.createElement("div"));
+for(let d=1;d<=days;d++){
+ const c=document.createElement("div");c.className="cell";
+ const dt=document.createElement("div");dt.className="date";dt.textContent=d;c.appendChild(dt);
+ if(EVENTS[d]){const ev=document.createElement("div");ev.className="event";ev.textContent=EVENTS[d];c.appendChild(ev);}
+ grid.appendChild(c);
+}
+</script>
+
+</body>
+</html>
